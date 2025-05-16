@@ -11,12 +11,12 @@ class Pokemon {
     public:
         Pokemon();
         Pokemon(string, int, int);
-        string get_name();
-        int get_hp();
-        int get_attack();
-        void set_name(string);
-        void set_hp(int);
-        void set_attack(int); 
+        string getName();
+        int getHp();
+        int getAttack();
+        void setName(string);
+        void setHp(int);
+        void setAttack(int); 
 
 
 };
