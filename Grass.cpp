@@ -4,7 +4,7 @@
 Grass::Grass() : Pokemon() {}
 
 //Constructoe by parameters 
-Grass::Grass(int vi, std::string nom): Pokemon(vi, nom){ 
+Grass::Grass(std::string nam, int h, int att): Pokemon(nam, h, att){ 
 }
 
 //getter

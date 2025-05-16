@@ -10,7 +10,7 @@ class Grass: public Pokemon{
     
     public:
         Grass(); 
-        Grass(int, std::string);
+        Grass(std::string, int, int);
         int getMultiplierG();
 };
 

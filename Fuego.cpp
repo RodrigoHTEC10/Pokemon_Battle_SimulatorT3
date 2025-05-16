@@ -4,7 +4,7 @@
 Fuego::Fuego() : Pokemon() {}
 
 //Constructor by parameters 
-Fuego::Fuego(int vi, std::string nom): Pokemon(vi, nom){ 
+Fuego::Fuego(std::string nam, int h, int att): Pokemon(nam, h, att){ 
 }
 
 //getter

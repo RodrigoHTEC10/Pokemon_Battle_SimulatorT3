@@ -10,7 +10,7 @@ class Fuego: public Pokemon{
     
     public: 
         Fuego();
-        Fuego(int, std::string);
+        Fuego(std::string, int, int);
         int getMultiplierF();
 };
 
