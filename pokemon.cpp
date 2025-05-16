@@ -15,34 +15,34 @@ Pokemon::Pokemon(string name_, int hp_, int attack_){
 
 }
 
-string Pokemon::get_name(){
+string Pokemon::getName(){
 
     return name;
 }
 
-int Pokemon::get_hp(){
+int Pokemon::getHp(){
 
     return hp;
 }
 
-int Pokemon::get_attack(){
+int Pokemon::getAttack(){
 
     return attack;
 }
 
-void Pokemon::set_name(string name_){
+void Pokemon::setName(string name_){
 
     name=name_;
 
     
 }
 
-void Pokemon::set_attack(int attack_){
+void Pokemon::setAttack(int attack_){
 
     attack=attack_;
 }
 
-void Pokemon::set_hp(int hp_){
+void Pokemon::setHp(int hp_){
 
     hp=hp_;
 }
