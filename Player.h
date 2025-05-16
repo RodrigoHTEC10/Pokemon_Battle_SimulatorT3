@@ -11,7 +11,7 @@ class Player{
 
     public:
         Player();
-        Player(string name_, char symb_);
+        Player(string name_, int id_);
         
         //---------------------------------------------------------------------------------------------------------
         //Getters
