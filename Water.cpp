@@ -1,11 +1,15 @@
+#include <iostream>
 #include "Water.h"
+#include "Pokemon.cpp"
 
-Water::Water() : Pakemon() {}
+using namespace std;
+
+Water::Water() : Pokemon() {};
 
 
-Water::Water(int vi, std::string nom): Pokemon(vi,nom){
-}
+Water::Water(std::string nam, int h, int att): Pokemon(nam, h, att){ 
+};
 
 int Water::getMultiplierW(){
     return multiplierW;
-}
+};

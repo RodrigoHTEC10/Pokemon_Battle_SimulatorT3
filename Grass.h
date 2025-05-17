@@ -1,6 +1,10 @@
-#include <string>
 #ifndef GRASS_H
 #define GRASS_H
+
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 #include "Pokemon.h"
 
@@ -10,7 +14,9 @@ class Grass: public Pokemon{
     
     public:
         Grass(); 
+
         Grass(std::string, int, int);
+        
         int getMultiplierG();
 };
 

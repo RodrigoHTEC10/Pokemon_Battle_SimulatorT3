@@ -12,6 +12,8 @@ using namespace std;
 Player::Player(){
     name = "";
     id = 0;
+    pokeName = "";
+    pokeType = "";
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -20,6 +22,8 @@ Player::Player(){
 Player::Player(string name_, int id_){
     name = name_;
     id = id_;
+    pokeName = "";
+    pokeType = "";
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -35,6 +39,13 @@ int Player::getId(){
     return id;
 };
 
+string Player::getPokeName(){
+    return pokeName;
+};
+
+string Player::getPokeType(){
+    return pokeType;
+};
 
 //-------------------------------------------------------------------------------------------------
 //Setters
@@ -47,5 +58,14 @@ void Player::setName(string name_){
 //setId(int id_) allows to set the id of the player as the character variable id_.
 void Player::setId(int id_){
     id=id_;
+};
+
+
+void Player::setPokeName(string name_){
+    pokeName = name_;
+};
+
+void Player::setPokeType(string type_){
+    pokeType = type_;
 };
 

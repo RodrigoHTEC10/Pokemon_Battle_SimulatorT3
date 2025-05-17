@@ -1,6 +1,9 @@
-#include <string>
 #ifndef FUEGO_H
 #define FUEGO_H
+#include <iostream>
+#include <string>
+
+using namespace std;
 
 #include "Pokemon.h"
 
@@ -10,7 +13,9 @@ class Fuego: public Pokemon{
     
     public: 
         Fuego();
+
         Fuego(std::string, int, int);
+
         int getMultiplierF();
 };
 

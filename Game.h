@@ -1,5 +1,13 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
-#include "Pokemon.h"
+#include <vector>
+
+#include "Fuego.cpp"
+#include "Grass.cpp"
+#include "Water.cpp"
+#include "Player.cpp"
 
 using namespace std;
 
@@ -9,23 +17,30 @@ class Game
 {
 
 private:
-    Pokemon WaterPokemon[10];
-    Pokemon FirePokemon[10];
-    Pokemon GrassPokemon[10];
+    vector <Water> WaterPokemon;
+    vector <Fuego> FirePokemon;
+    vector <Grass> GrassPokemon;
+    Player players[2];
 public:
     Game();
 
-    Game(Pokemon[] water, Pokemon[] fire, Pokemon[] grass);
+    Game(vector<Water> water, vector<Fuego> fire, vector<Grass> grass);
 
     //---------------------------------------------------------------------------------------------------------
     //Getters
 
-    string getPokemon();
+    string choosePokemon(int num);
 
     //---------------------------------------------------------------------------------------------------------
     //Methods
+    Water getWaterPokemon(string name);
+    Fuego getFirePokemon(string name);
+    Grass getGrassPokemon(string name);
 
-    void attack();
+    void attack(Player attack, Player receives);
     
     void play();
 };
+
+
+#endif
