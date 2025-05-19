@@ -8,7 +8,7 @@ using namespace std;
 Grass::Grass() : Pokemon() {};
 
 //Constructoe by parameters 
-Grass::Grass(string nam, float h, float att, float multip): Pokemon(nam, h, att){ 
+Grass::Grass(string nam, float h, float att): Pokemon(nam, h, att){ 
 };
 
 //getter
