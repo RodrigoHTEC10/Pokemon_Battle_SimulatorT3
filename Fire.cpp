@@ -8,7 +8,7 @@ using namespace std;
 Fire::Fire():Pokemon(){};
 
 //Constructor by parameters 
-Fire::Fire(string nam, float h, float att): Pokemon(nam, h, att){ 
+Fire::Fire(string nam, float h, float att, float multip): Pokemon(nam, h, att){ 
 };
 
 //getter
