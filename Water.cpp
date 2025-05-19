@@ -7,7 +7,7 @@ using namespace std;
 Water::Water() : Pokemon() {};
 
 
-Water::Water(string nam, float h, float att, float multip): Pokemon(nam, h, att){ 
+Water::Water(string nam, float h, float att): Pokemon(nam, h, att){ 
 };
 
 float Water::getMultiplierW(){
