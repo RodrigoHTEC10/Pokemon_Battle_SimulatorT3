@@ -6,7 +6,7 @@
 using namespace std; 
 
 class Pokemon {
-    private: 
+    protected: 
 
         string name; 
         float hp; 
