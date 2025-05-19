@@ -12,14 +12,17 @@ using namespace std;
 
 class Water: public Pokemon{
     private:
-        const float multiplierW = 0.6;
+        float multiplierW = 0.6;
 
     public:
         Water();
 
-        Water(string nam, int h, int att);
+        Water(string nam, float h, float att);
         
-        int getMultiplierW();
+        float getMultiplierW();
+
+        //Temporal Methods
+        void getInfo();
 };
 
 #endif

@@ -31,6 +31,9 @@ class Player{
         void setId(int id_);
         void setPokeName(string name_);
         void setPokeType(string type_);
+
+        //Temporal Methods
+        void getInfo();
 };
 
 #endif

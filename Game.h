@@ -4,10 +4,11 @@
 #include <iostream>
 #include <vector>
 
-#include "Fuego.cpp"
-#include "Grass.cpp"
-#include "Water.cpp"
-#include "Player.cpp"
+#include "Pokemon.h"
+#include "Fire.h"
+#include "Grass.h"
+#include "Water.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -18,26 +19,27 @@ class Game
 
 private:
     vector <Water> WaterPokemon;
-    vector <Fuego> FirePokemon;
+    vector <Fire> FirePokemon;
     vector <Grass> GrassPokemon;
     Player players[2];
 public:
     Game();
 
-    Game(vector<Water> water, vector<Fuego> fire, vector<Grass> grass);
+    Game(vector<Water> water, vector<Fire> fire, vector<Grass> grass);
 
     //---------------------------------------------------------------------------------------------------------
     //Getters
 
     string choosePokemon(int num);
+    Player getPlayer(int num);
 
     //---------------------------------------------------------------------------------------------------------
     //Methods
     Water getWaterPokemon(string name);
-    Fuego getFirePokemon(string name);
+    Fire getFirePokemon(string name);
     Grass getGrassPokemon(string name);
 
-    void attack(Player attack, Player receives);
+    float attack(Player attacker, Player receives, float life2);
     
     void play();
 };

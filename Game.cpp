@@ -10,7 +10,7 @@ using namespace std;
 
 Game::Game(){};
 
-Game::Game(vector<Water> water, vector<Fuego> fire, vector<Grass> grass){
+Game::Game(vector<Water> water, vector<Fire> fire, vector<Grass> grass){
     for (int i = 0; i<water.size(); i++){
         WaterPokemon.push_back(water[i]);
     }
@@ -34,16 +34,18 @@ string Game::choosePokemon(int num){
     int type;
     int poke;
 
-
-    cout<<"Player enter your name: ";
+    
+    cout<<"Welcome Player"<<num<<endl;
+    cout<<""<<endl;
+    cout<<"Enter your name: ";
     cin>>name;
 
     Player p(name,num);
     players[num-1]=p;
 
-    cout<<"Player choose your Pokemon class: "<<endl;
+    cout<<"Choose your Pokemon class: "<<endl;
     
-    for(int i=0; i<sizeof(types);i++){
+    for(int i=0; i<3;i++){
         cout<<i+1<<" . "<<types[i]<<endl;
     }
     
@@ -52,7 +54,7 @@ string Game::choosePokemon(int num){
     players[num-1].setPokeType(types[type-1]);
 
     cout<<""<<endl;
-    cout<<"Player choose your Pokemon: "<<endl;
+    cout<<"Choose your Pokemon: "<<endl;
 
     if(type == 1){
         for(int i=0; i<WaterPokemon.size();i++){
@@ -88,6 +90,10 @@ string Game::choosePokemon(int num){
 }
 
 
+Player Game::getPlayer(int num){
+    return players[num-1];
+};
+
     //---------------------------------------------------------------------------------------------------------
     //Methods
 
@@ -97,18 +103,18 @@ Water Game::getWaterPokemon(string name){
             return WaterPokemon[i];
         }
     }
-    return Water();
+    return WaterPokemon[0];
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Fuego Game::getFirePokemon(string name){
+Fire Game::getFirePokemon(string name){
     for(int i=0; i<FirePokemon.size();i++){
         if(FirePokemon[i].getName()==name){
             return FirePokemon[i];
         }
     }
-    return Fuego();
+    return FirePokemon[0];
 };
 
 
@@ -119,183 +125,212 @@ Grass Game::getGrassPokemon(string name){
             return GrassPokemon[i];
         }
     }
-    return Grass();
+    return GrassPokemon[0];
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void Game::attack(Player attacker, Player receives){
+float Game::attack(Player attacker, Player receives, float life2){
     string typeAttack = attacker.getPokeType();
     string typeReceiver = receives.getPokeType();
 
 
     if(typeAttack == "Water" && typeReceiver =="Fire"){
         Water PokeAttack = getWaterPokemon(attacker.getPokeName());
-        Fuego PokeRece = getFirePokemon(receives.getPokeName());
-        PokeRece.setHp(PokeRece.getHp()-(PokeAttack.getAttack()* PokeAttack.getMultiplierW()));
+        Fire PokeRece = getFirePokemon(receives.getPokeName());
+        life2 = life2-(PokeAttack.getAttack() + (PokeAttack.getAttack()* PokeAttack.getMultiplierW()));
 
         //Create message
         cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
         cout<<"Type Advantege! Damage Increased"<<endl;
-        cout<<"Special attack of "<<PokeAttack.getAttack()* PokeAttack.getMultiplierW()<<" damage points."<<endl;
-        cout<<receives.getPokeName()<<" has "<<PokeRece.getHp()<<" HP points remaining."<<endl;
+        cout<<"Special attack of "<<PokeAttack.getAttack() + PokeAttack.getAttack()*PokeAttack.getMultiplierW()<<" damage points."<<endl;
+        cout<<receives.getPokeName()<<" has "<<life2<<" HP points remaining."<<endl;
 
 
     }
     else if(typeAttack == "Fire" && typeReceiver =="Grass"){
-        Fuego PokeAttack = getFirePokemon(attacker.getPokeName());
+        Fire PokeAttack = getFirePokemon(attacker.getPokeName());
         Grass PokeRece = getGrassPokemon(receives.getPokeName());
-        PokeRece.setHp(PokeRece.getHp()-(PokeAttack.getAttack()* PokeAttack.getMultiplierF()));
+        life2 = life2-(PokeAttack.getAttack() + PokeAttack.getAttack()* PokeAttack.getMultiplierF());
 
         //Create message
         cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
         cout<<"Type Advantege! Damage Increased"<<endl;
-        cout<<"Special attack of "<<PokeAttack.getAttack()* PokeAttack.getMultiplierF()<<" damage points."<<endl;
-        cout<<receives.getPokeName()<<" has "<<PokeRece.getHp()<<" HP points remaining."<<endl;
+        cout<<"Special attack of "<<PokeAttack.getAttack() + PokeAttack.getAttack()* PokeAttack.getMultiplierF()<<" damage points."<<endl;
+        cout<<receives.getPokeName()<<" has "<<life2<<" HP points remaining."<<endl;
     }
 
 
     else if(typeAttack == "Grass" && typeReceiver =="Water"){
         Grass PokeAttack = getGrassPokemon(attacker.getPokeName());
         Water PokeRece = getWaterPokemon(receives.getPokeName());
-        PokeRece.setHp(PokeRece.getHp()-(PokeAttack.getAttack()* PokeAttack.getMultiplierG()));
+        life2 = life2-(PokeAttack.getAttack() + PokeAttack.getAttack()* PokeAttack.getMultiplierG());
         
         //Create message
         //Create message
         cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
         cout<<"Type Advantege! Damage Increased"<<endl;
-        cout<<"Special attack of "<<PokeAttack.getAttack()* PokeAttack.getMultiplierG()<<" damage points."<<endl;
-        cout<<receives.getPokeName()<<" has "<<PokeRece.getHp()<<" HP points remaining."<<endl;
+        cout<<"Special attack of "<<PokeAttack.getAttack() + PokeAttack.getAttack()* PokeAttack.getMultiplierG()<<" damage points."<<endl;
+        cout<<receives.getPokeName()<<" has "<<life2<<" HP points remaining."<<endl;
     }
     //*****************************************************************************************/
     else{
         if(typeAttack == "Water" && typeReceiver =="Water"){
             Water PokeAttack = getWaterPokemon(attacker.getPokeName());
             Water PokeRece = getWaterPokemon(receives.getPokeName());
-            PokeRece.setHp(PokeRece.getHp()-(PokeAttack.getAttack()));
+            life2 = life2-(PokeAttack.getAttack());
 
             //Generic Message
             cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
             cout<<"Normal attack of "<<PokeAttack.getAttack()<<" damage points."<<endl;
-            cout<<receives.getPokeName()<<" has "<<PokeRece.getHp()<<" HP points remaining."<<endl;
+            cout<<receives.getPokeName()<<" has "<<life2<<" HP points remaining."<<endl;
 
         }
         //--------------------------------------------------------------
         else if(typeAttack == "Water" && typeReceiver =="Grass"){
             Water PokeAttack = getWaterPokemon(attacker.getPokeName());
             Grass PokeRece = getGrassPokemon(receives.getPokeName());
-            PokeRece.setHp(PokeRece.getHp()-(PokeAttack.getAttack()));
+            life2 = life2-(PokeAttack.getAttack());
 
             //Generic Message
             cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
             cout<<"Normal attack of "<<PokeAttack.getAttack()<<" damage points."<<endl;
-            cout<<receives.getPokeName()<<" has "<<PokeRece.getHp()<<" HP points remaining."<<endl;
+            cout<<receives.getPokeName()<<" has "<<life2<<" HP points remaining."<<endl;
 
         }
         //--------------------------------------------------------------
         else if(typeAttack == "Fire" && typeReceiver =="Water"){
-            Fuego PokeAttack = getFirePokemon(attacker.getPokeName());
+            Fire PokeAttack = getFirePokemon(attacker.getPokeName());
             Water PokeRece = getWaterPokemon(receives.getPokeName());
-            PokeRece.setHp(PokeRece.getHp()-(PokeAttack.getAttack()));
+            life2 = life2-(PokeAttack.getAttack());
 
             //Generic Message
             cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
             cout<<"Normal attack of "<<PokeAttack.getAttack()<<" damage points."<<endl;
-            cout<<receives.getPokeName()<<" has "<<PokeRece.getHp()<<" HP points remaining."<<endl;
+            cout<<receives.getPokeName()<<" has "<<life2<<" HP points remaining."<<endl;
 
         }
         //--------------------------------------------------------------
         else if(typeAttack == "Fire" && typeReceiver =="Fire"){
-            Fuego PokeAttack = getFirePokemon(attacker.getPokeName());
-            Fuego PokeRece = getFirePokemon(receives.getPokeName());
-            PokeRece.setHp(PokeRece.getHp()-(PokeAttack.getAttack()));
+            Fire PokeAttack = getFirePokemon(attacker.getPokeName());
+            Fire PokeRece = getFirePokemon(receives.getPokeName());
+            life2 = life2-(PokeAttack.getAttack());
 
             //Generic Message
             cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
             cout<<"Normal attack of "<<PokeAttack.getAttack()<<" damage points."<<endl;
-            cout<<receives.getPokeName()<<" has "<<PokeRece.getHp()<<" HP points remaining."<<endl;
+            cout<<receives.getPokeName()<<" has "<<life2<<" HP points remaining."<<endl;
         }
         //--------------------------------------------------------------
         else if(typeAttack == "Grass" && typeReceiver =="Fire"){
             Grass PokeAttack = getGrassPokemon(attacker.getPokeName());
-            Fuego PokeRece = getFirePokemon(receives.getPokeName());
-            PokeRece.setHp(PokeRece.getHp()-(PokeAttack.getAttack()));
+            Fire PokeRece = getFirePokemon(receives.getPokeName());
+            life2 = life2-(PokeAttack.getAttack());
 
             //Generic Message
             cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
             cout<<"Normal attack of "<<PokeAttack.getAttack()<<" damage points."<<endl;
-            cout<<receives.getPokeName()<<" has "<<PokeRece.getHp()<<" HP points remaining."<<endl;
+            cout<<receives.getPokeName()<<" has "<<life2<<" HP points remaining."<<endl;
         }
         //--------------------------------------------------------------
         else{
             Grass PokeAttack = getGrassPokemon(attacker.getPokeName());
             Grass PokeRece = getGrassPokemon(receives.getPokeName());
-            PokeRece.setHp(PokeRece.getHp()-(PokeAttack.getAttack()));
+            life2 = life2-(PokeAttack.getAttack());
 
             //Generic Message
             cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
             cout<<"Normal attack of "<<PokeAttack.getAttack()<<" damage points."<<endl;
-            cout<<receives.getPokeName()<<" has "<<PokeRece.getHp()<<" HP points remaining."<<endl;
+            cout<<receives.getPokeName()<<" has "<<life2<<" HP points remaining."<<endl;
         }
 
     }
+
+    return life2;
 
 };
 
 
 void Game::play(){
+    cout<<"Welcome to the Pokemon Battle."<<endl;
+    cout<<"Players, to your corners..."<<endl;
+    cout<<""<<endl;
     choosePokemon(1);
+    cout<<""<<endl;
     choosePokemon(2);
     bool win = false;
-
+    cout<<""<<endl;
     cout<<"--Battle Start!--"<<endl;
+    cout<<""<<endl;
+
+    string type0 = players[0].getPokeType();
+    string type1 = players[1].getPokeType();
+
+    int player1Health;
+    int player2Health;
+
+
+    if(type0 == "Water"){
+        player1Health = getWaterPokemon(players[0].getPokeName()).getHp();
+    }
+    else if(type0 == "Fire"){
+        player1Health = getFirePokemon(players[0].getPokeName()).getHp();
+    }
+    else{
+        player1Health = getGrassPokemon(players[0].getPokeName()).getHp();
+    }
+
+    if(type1 == "Water"){
+        player2Health = getWaterPokemon(players[0].getPokeName()).getHp();
+    }
+    else if(type1 == "Fire"){
+        player2Health = getFirePokemon(players[0].getPokeName()).getHp();
+    }
+    else{
+        player2Health = getGrassPokemon(players[0].getPokeName()).getHp();
+    }
+
+    //Counter
+    int i = 0;
 
     while (win == false){
-        int i = 0;
+        
+
         if(i%2 == 0){
-            attack(players[0], players[1]);
+            cout<<""<<endl;
+            player2Health = attack(players[0], players[1], player2Health);
         }
         else{
-            attack(players[1], players[0]);
+            cout<<""<<endl;
+            player1Health = attack(players[1], players[0], player1Health);
         }
 
-        string type0 = players[0].getPokeType();
-        string type1 = players[1].getPokeType();
-
-        int player1Health;
-        int player2Health;
-
-
-        if(type0 == "Water"){
-            player1Health = getWaterPokemon(players[0].getPokeName()).getHp();
-        }
-        else if(type0 == "Fire"){
-            player1Health = getFirePokemon(players[0].getPokeName()).getHp();
-        }
-        else{
-            player1Health = getGrassPokemon(players[0].getPokeName()).getHp();
-        }
-
-        if(type1 == "Water"){
-            player2Health = getWaterPokemon(players[0].getPokeName()).getHp();
-        }
-        else if(type1 == "Fire"){
-            player2Health = getFirePokemon(players[0].getPokeName()).getHp();
-        }
-        else{
-            player2Health = getGrassPokemon(players[0].getPokeName()).getHp();
-        }
+        //_______________________________________________________
+        //cout<<"Player 1 Health: "<<player1Health<<endl;
+        //cout<<"Player 2 Health: "<<player2Health<<endl;
+        //_______________________________________________________-
 
         if(player1Health <= 0){
+            cout<<""<<endl;
             cout<<players[0].getPokeName()<<" has fainted!"<<endl;
             cout<<players[1].getPokeName()<<" wins the battle!"<<endl;
+            cout<<""<<endl;
+            cout<<"--End of the Battle--"<<endl;
             win = true;
+
+
+
         }
         else if(player2Health <= 0){
+            cout<<""<<endl;
             cout<<players[1].getPokeName()<<" has fainted!"<<endl;
             cout<<players[0].getPokeName()<<" wins the battle!"<<endl;
+            cout<<""<<endl;
+            cout<<"--End of the Battle--"<<endl;
             win = true;
         }
+
+        i++;
 
     }
 
@@ -303,24 +338,3 @@ void Game::play(){
 
     
 };
-
-
-
-int main(){
-    Fuego poke1("Charmander",309,52);
-    //Fuego poke2("Arcanine",555,90);
-    //vector <Fuego> fire = {poke1, poke2};
-
-    //Water poke3("Wishiwashi",620,140);
-    //Water poke4("Basculegion",530,112);
-    //vector <Water> water = {poke3, poke4};
-
-    //Grass poke5("Venusaur",525,82);
-    //Grass poke6("Tangela",435,55);
-    //vector <Grass> grass = {poke5, poke6};
-
-    //Game game(water, fire, grass);
-    //game.play();
-
-    return 0;
-}

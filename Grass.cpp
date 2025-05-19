@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Grass.h"
-#include "Pokemon.cpp"
+#include "Pokemon.h"
 
 using namespace std;
 
@@ -8,10 +8,15 @@ using namespace std;
 Grass::Grass() : Pokemon() {};
 
 //Constructoe by parameters 
-Grass::Grass(std::string nam, int h, int att): Pokemon(nam, h, att){ 
+Grass::Grass(string nam, float h, float att): Pokemon(nam, h, att){ 
 };
 
 //getter
-int Grass::getMultiplierG(){
+float Grass::getMultiplierG(){
     return multiplierG;
+};
+
+void Grass::getInfo(){
+    Pokemon::getInfo();
+    cout<<"Multiplicador: "<<multiplierG<<endl;
 };

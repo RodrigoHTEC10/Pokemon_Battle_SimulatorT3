@@ -69,3 +69,9 @@ void Player::setPokeType(string type_){
     pokeType = type_;
 };
 
+void Player::getInfo(){
+    cout<<"Player Name:"<<name<<endl;
+    cout<<"Player ID:"<<id<<endl;
+    cout<<"Pokemon Name:"<<pokeName<<endl;
+    cout<<"Pokemon Type:"<<pokeType<<endl;
+};

@@ -10,14 +10,17 @@ using namespace std;
 
 class Grass: public Pokemon{
     private: 
-        const float multiplierG = 0.5; 
+        float multiplierG = 0.5; 
     
     public:
         Grass(); 
 
-        Grass(std::string, int, int);
+        Grass(string nam, float h, float att);
         
-        int getMultiplierG();
+        float getMultiplierG();
+
+        //Temporal Methods
+        void getInfo();
 };
 
 
