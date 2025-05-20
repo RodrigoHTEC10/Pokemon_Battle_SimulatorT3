@@ -16,6 +16,10 @@ float Fire::getMultiplierF(){
     return multiplierF;
 };
 
+float Fire::getMultiplierF(string extra){
+    return multiplierF+0.2;
+};
+
 
 void Fire::getInfo(){
     Pokemon::getInfo();

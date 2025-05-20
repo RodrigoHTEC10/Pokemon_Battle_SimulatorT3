@@ -6,7 +6,7 @@
 using namespace std; 
 
 class Pokemon {
-    protected: 
+    private: 
 
         string name; 
         float hp; 
@@ -23,7 +23,7 @@ class Pokemon {
         void setAttack(float); 
 
         //Temporal Methods
-        void getInfo();
+        virtual void getInfo();
 
 };
 

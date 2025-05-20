@@ -39,7 +39,7 @@ public:
     Fire getFirePokemon(string name);
     Grass getGrassPokemon(string name);
 
-    float attack(Player attacker, Player receives, float life2);
+    float attack(Player attacker, Player receives, float life2, bool extraDam);
     
     void play();
 };

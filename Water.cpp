@@ -14,6 +14,10 @@ float Water::getMultiplierW(){
     return multiplierW;
 };
 
+float Water::getMultiplierW(string extra){
+    return multiplierW+0.2;
+};
+
 void Water::getInfo(){
     Pokemon::getInfo();
     cout<<"Multiplicador: "<<multiplierW<<endl;

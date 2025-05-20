@@ -19,8 +19,10 @@ class Grass: public Pokemon{
         
         float getMultiplierG();
 
+        float getMultiplierG(string extra);
+
         //Temporal Methods
-        void getInfo();
+        void getInfo() override;
 };
 
 

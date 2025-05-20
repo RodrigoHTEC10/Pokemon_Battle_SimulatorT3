@@ -77,16 +77,34 @@ string Game::choosePokemon(int num){
     
     if(type == 1){
         players[num-1].setPokeName(WaterPokemon[poke-1].getName());
+        cout<<""<<endl;
+        cout<<"Pokemon Stats: "<<endl;
+        WaterPokemon[poke-1].getInfo();
+        cout<<""<<endl;
         return players[num-1].getPokeName();
+        
     }
     else if(type ==2){
         players[num-1].setPokeName(FirePokemon[poke-1].getName());
+        cout<<""<<endl;
+        cout<<"Pokemon Stats: "<<endl;
+        FirePokemon[poke-1].getInfo();
+        cout<<""<<endl;
         return players[num-1].getPokeName();
+        
     }
     else{
         players[num-1].setPokeName(GrassPokemon[poke-1].getName());
+        cout<<""<<endl;
+        cout<<"Pokemon Stats: "<<endl;
+        GrassPokemon[poke-1].getInfo();
+        cout<<""<<endl;
         return players[num-1].getPokeName();
+
+        
     }
+
+    return "";
 }
 
 
@@ -130,7 +148,7 @@ Grass Game::getGrassPokemon(string name){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-float Game::attack(Player attacker, Player receives, float life2){
+float Game::attack(Player attacker, Player receives, float life2, bool extraDam){
     string typeAttack = attacker.getPokeType();
     string typeReceiver = receives.getPokeType();
 
@@ -138,7 +156,15 @@ float Game::attack(Player attacker, Player receives, float life2){
     if(typeAttack == "Water" && typeReceiver =="Fire"){
         Water PokeAttack = getWaterPokemon(attacker.getPokeName());
         Fire PokeRece = getFirePokemon(receives.getPokeName());
-        life2 = life2-(PokeAttack.getAttack() + (PokeAttack.getAttack()* PokeAttack.getMultiplierW()));
+        if (extraDam){
+            life2 = life2-(PokeAttack.getAttack() + (PokeAttack.getAttack()* PokeAttack.getMultiplierW("Extra")));
+        }
+        else{
+            life2 = life2-(PokeAttack.getAttack() + (PokeAttack.getAttack()* PokeAttack.getMultiplierW()));
+        }
+
+
+        
 
         //Create message
         cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
@@ -151,7 +177,12 @@ float Game::attack(Player attacker, Player receives, float life2){
     else if(typeAttack == "Fire" && typeReceiver =="Grass"){
         Fire PokeAttack = getFirePokemon(attacker.getPokeName());
         Grass PokeRece = getGrassPokemon(receives.getPokeName());
-        life2 = life2-(PokeAttack.getAttack() + PokeAttack.getAttack()* PokeAttack.getMultiplierF());
+        if (extraDam){
+            life2 = life2-(PokeAttack.getAttack() + (PokeAttack.getAttack()* PokeAttack.getMultiplierF("Extra")));
+        }
+        else{
+            life2 = life2-(PokeAttack.getAttack() + (PokeAttack.getAttack()* PokeAttack.getMultiplierF()));
+        }
 
         //Create message
         cout<<attacker.getPokeName()<<" attacked "<<receives.getPokeName()<<" !!!"<<endl;
@@ -164,7 +195,12 @@ float Game::attack(Player attacker, Player receives, float life2){
     else if(typeAttack == "Grass" && typeReceiver =="Water"){
         Grass PokeAttack = getGrassPokemon(attacker.getPokeName());
         Water PokeRece = getWaterPokemon(receives.getPokeName());
-        life2 = life2-(PokeAttack.getAttack() + PokeAttack.getAttack()* PokeAttack.getMultiplierG());
+        if (extraDam){
+            life2 = life2-(PokeAttack.getAttack() + (PokeAttack.getAttack()* PokeAttack.getMultiplierG("Extra")));
+        }
+        else{
+            life2 = life2-(PokeAttack.getAttack() + (PokeAttack.getAttack()* PokeAttack.getMultiplierG()));
+        }
         
         //Create message
         //Create message
@@ -294,15 +330,28 @@ void Game::play(){
     int i = 0;
 
     while (win == false){
+
+        bool extraDam = false;
+        int randomNum = rand() % 6;
+        if (randomNum%2 == 0){
+            extraDam = true;
+        }
         
 
+
         if(i%2 == 0){
+            if(extraDam){
+                cout<<"Boost!!!"<<endl;
+            }
             cout<<""<<endl;
-            player2Health = attack(players[0], players[1], player2Health);
+            player2Health = attack(players[0], players[1], player2Health, extraDam);
         }
         else{
+            if(extraDam){
+                cout<<"Boost!!!"<<endl;
+            }
             cout<<""<<endl;
-            player1Health = attack(players[1], players[0], player1Health);
+            player1Health = attack(players[1], players[0], player1Health, extraDam);
         }
 
         //_______________________________________________________

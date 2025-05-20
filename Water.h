@@ -21,8 +21,10 @@ class Water: public Pokemon{
         
         float getMultiplierW();
 
+        float getMultiplierW(string extra);
+
         //Temporal Methods
-        void getInfo();
+        void getInfo() override;
 };
 
 #endif

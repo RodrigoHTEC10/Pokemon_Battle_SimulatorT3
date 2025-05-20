@@ -18,8 +18,10 @@ class Fire: public Pokemon{
 
         float getMultiplierF();
 
+        float getMultiplierF(string extra);
+
         //Temporal methods
-        void getInfo();
+        void getInfo() override;
 };
 
 #endif
